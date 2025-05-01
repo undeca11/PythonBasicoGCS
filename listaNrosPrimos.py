@@ -1,5 +1,5 @@
 ###
-### Preenche lista com n primeiros numeros primos
+### Preenche uma lista com os n primeiros numeros primos
 ###
 ### Prof. Filipo Novo Mór
 ###
@@ -11,15 +11,15 @@ def EhPrimo(nro):
             return False
     return True
     
-Quantidade = int(input("Quantos numeros primos voce deseja?"))
-lista = [0]*Quantidade # cria lista preenchida com valores zero do tamanho necessario
-pos   = 0 # controla a proxima posicao da lista que recebera um numero primo
-cont  = 0 # contador de iteracoes
+Quantidade               = int(input("Quantos numeros primos voce deseja? "))
+lista                    = [0]*Quantidade # cria lista preenchida com valores zero do tamanho necessario
+pos                      = 0 # controla a proxima posicao da lista que recebera um numero primo
+numero_a_ser_verificado  = 2 # 0 e 1 nao sao primos
 
 while(pos < Quantidade):
-    if EhPrimo(cont + 1):
-        lista[pos] = cont + 1
+    if EhPrimo(numero_a_ser_verificado):
+        lista[pos] = numero_a_ser_verificado
         pos += 1
-    cont += 1
+    numero_a_ser_verificado += 1
     
 print(f"Os {Quantidade} primeiros numeros primos sao: {lista}")
