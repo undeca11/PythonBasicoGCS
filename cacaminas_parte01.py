@@ -47,6 +47,34 @@ def CriaBombas(tabuleiro, qtBombas, valorBomba):
         tabuleiro[posX][posY] = valorBomba
         print(f"sorteios: {cont}")
 
+###
+### Contador de Bombas e atualiza o Tabuleiro
+###
+def ContaBombas(tabuleiro, valorBomba):
+    for y in range(0, len(tabuleiro)):
+        for x in range(0, len(tabuleiro[y])):
+            if tabuleiro[y][x] != valorBomba:
+                cont = 0
+                # olha acima, se possivel
+                if y > 0:
+                    if tabuleiro[y-1][x] == valorBomba: cont += 1
+                # olha abaixo, se possivel
+                if y < len(tabuleiro)-1:
+                    if tabuleiro[y+1][x] == valorBomba: cont += 1
+                # olha para a direita, se possivel
+                if x < len(tabuleiro[y])-1:
+                    if tabuleiro[y][x+1] == valorBomba: cont += 1
+                # olha para a esquerda, se possivel
+                if x > 0:
+                    if tabuleiro[y][x-1] == valorBomba: cont += 1
+                # atualiza o valor de bombas ao redor na celula
+                tabuleiro[y][x] = cont
+
+
+
+
+
 CriaTabuleiro(Tabuleiro, Altura, Largura, 0)
 CriaBombas(Tabuleiro, qtBombas, valorBomba)
+ContaBombas(Tabuleiro, valorBomba)
 MostraTabuleiro(Tabuleiro)
