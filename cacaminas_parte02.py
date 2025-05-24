@@ -1,11 +1,10 @@
 ###
-### Caca Minas - parte 01
+### Caca Minas - parte 02
 ###
-import copy
 import random as rd
 
 ### Configuracoes
-qtBombas    =  5
+qtBombas    =  7
 qtBandeiras =  0
 Largura     = 10 # qt de colunas do tabuleiro
 Altura      = 10 # qt de linhas do tabuleiro
@@ -48,20 +47,14 @@ def MostraTabuleiroCompleto(tabuleiro, tabStatus, tabMarcacao):
 ### Popula o tabuleiro com a quantidade de bombas configurada
 ###
 def CriaBombas(tabuleiro, qtBombas, valorBomba):
-    cont = 0
-    for x in range(0, qtBombas):
-        posLivre = False
-        while not posLivre:
-            posLivre = True
-            posX = rd.randint(0, Largura-1)
-            posY = rd.randint(0, Altura-1)
-            if tabuleiro[posX][posY] == valorBomba:
-                posLivre = False
-            print(posX, posY)
-            cont += 1
-        tabuleiro[posX][posY] = valorBomba
-        print(f"sorteios: {cont}")
+    posicoes = [(x, y) for x in range(Largura) for y in range(Altura)]
+    rd.shuffle(posicoes)  # Embaralha as posições possíveis
 
+    for i in range(qtBombas):
+        posX, posY = posicoes[i]
+        tabuleiro[posX][posY] = valorBomba
+
+'''
 ###
 ### Contador de Bombas e atualiza o Tabuleiro
 ###
@@ -97,6 +90,36 @@ def ContaBombas(tabuleiro, valorBomba):
 
                 # atualiza o valor de bombas ao redor na celula
                 tabuleiro[y][x] = cont
+'''
+
+###
+### Contador de Bombas e atualiza o Tabuleiro
+###
+def ContaBombas(tabuleiro, valorBomba):
+    # A função começa definindo uma lista de offsets que representam os oito possíveis
+    # deslocamentos em torno de uma célula específica (direções que precisam ser verificadas:
+    # acima, baixo, esquerda, direita e as quatro diagonais)
+    offsets = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
+    # Cada tupla (dy, dx) representa um deslocamento relativo à posição atual (y, x) no tabuleiro.
+
+    # A função percorre cada célula do tabuleiro usando loops duplos para linhas (y) e colunas (x).
+    for y in range(len(tabuleiro)):
+        for x in range(len(tabuleiro[y])):
+            if tabuleiro[y][x] != valorBomba: # Para cada célula, ela verifica se não contém uma bomba.
+                                              # Se a célula contém uma bomba, ela é ignorada.
+
+                # A função calcula quantas bombas existem ao redor da célula atual
+                # usando uma expressão sum. Para cada offset, ela verifica se a
+                # célula adjacente existe dentro dos limites do tabuleiro e se contém uma bomba.
+                cont = sum(
+                    1 for dy, dx in offsets
+                    # 0 <= y + dy < len(tabuleiro): Garante que o novo y está dentro dos limites do tabuleiro.
+                    # 0 <= x + dx < len(tabuleiro[0]): Garante que o novo x está dentro dos limites do tabuleiro.
+                    if 0 <= y + dy < len(tabuleiro) and 0 <= x + dx < len(tabuleiro[0])
+                    and tabuleiro[y + dy][x + dx] == valorBomba #Verifica se a célula no deslocamento atual contém uma bomba.
+                )
+                tabuleiro[y][x] = cont # atualiza o contador de bombas para a celula atual
+
 
 def AbreArea(tabuleiro, tabStatus, linha, coluna, celulaAnteriorVazia):
 
@@ -120,8 +143,8 @@ def AbreArea(tabuleiro, tabStatus, linha, coluna, celulaAnteriorVazia):
         if coluna < len(tabuleiro)-1 and tabStatus[linha][coluna+1] != celAberta:
             cont += AbreArea(tabuleiro, tabStatus, linha, coluna+1, True)
 
-    elif tabStatus[linha][coluna] != celAberta and tabuleiro[linha][coluna] > 0 and tabuleiro[linha][coluna] <= 8 and celulaAnteriorVazia == True:
-    #elif tabStatus[linha][coluna] != celAberta and celulaAnteriorVazia == False:   # expande a area, excluindo celulas com contador
+    #elif tabStatus[linha][coluna] != celAberta and tabuleiro[linha][coluna] > 0 and tabuleiro[linha][coluna] <= 8 and celulaAnteriorVazia == True:
+    elif tabStatus[linha][coluna] != celAberta and celulaAnteriorVazia == False:   # expande a area, excluindo celulas com contador
     #elif tabStatus[linha][coluna] != celAberta and celulaAnteriorVazia == True:    # expande a area, incluindo uma camada de celulas com contador
         tabStatus[linha][coluna] = celAberta
         cont += 1
@@ -132,12 +155,12 @@ def AbreArea(tabuleiro, tabStatus, linha, coluna, celulaAnteriorVazia):
 CriaTabuleiro(Tabuleiro, Altura, Largura, 0)
 CriaBombas(Tabuleiro, qtBombas, valorBomba)
 ContaBombas(Tabuleiro, valorBomba)
-MostraTabuleiro(Tabuleiro)
+#MostraTabuleiro(Tabuleiro)
 
 CriaTabuleiro(TabStatus, Altura, Largura, 0)   # todas as celulas fechadas
 CriaTabuleiro(TabMarcacao, Altura, Largura, 0) # nenhuma celula marcada
 
-MostraTabuleiroCompleto(Tabuleiro, TabStatus, TabMarcacao)
+#MostraTabuleiroCompleto(Tabuleiro, TabStatus, TabMarcacao)
 contador = AbreArea(Tabuleiro, TabStatus, 5, 5, False) # teste
 MostraTabuleiroCompleto(Tabuleiro, TabStatus, TabMarcacao)
 
