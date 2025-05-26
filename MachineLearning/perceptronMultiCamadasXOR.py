@@ -1,7 +1,7 @@
 #########################################################
 ### Exemplo de perceptron multicamada - problema XOR  ###
 #########################################################
-### prof. Filipo Mor - maio de 2025
+### Prof. Filipo Mor - maio de 2025                   ###
 #########################################################
 import numpy as np
 
