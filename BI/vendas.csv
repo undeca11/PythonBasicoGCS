@@ -1,0 +1,11 @@
+produto,região,preço_unitario,quantidade
+Mouse,Centro-Oeste,50.00,10
+Teclado,Sul,80.00,5
+Monitor,Nordeste,1200.00,2
+Notebook,Norte,3500.00,1
+Impressora,Centro-Oeste,600.00,3
+Mouse,Sul,50.00,15
+Teclado,Nordeste,80.00,7
+Monitor,Centro-Oeste,1200.00,4
+Notebook,Sul,3500.00,2
+Impressora,Nordeste,600.00,1
