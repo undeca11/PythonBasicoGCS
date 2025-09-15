@@ -24,3 +24,15 @@ def gerar_matriz(N):
 if __name__ == "__main__":
     N = int(input("Digite o valor de N: "))
     gerar_matriz(N)
+
+'''
+Explicando a declaracao  {valor:>{M}}
+
+Dentro das chaves temos três elementos:
+   valor → é o número que será exibido.
+   : → separa a variável de suas regras de formatação.
+   >{M} → significa:
+      > → alinhamento à direita.
+      {M} → largura mínima da célula, ou seja, quantos caracteres o número vai ocupar.
+Se o número tiver menos dígitos que M, ele é preenchido com espaços à esquerda.
+'''
