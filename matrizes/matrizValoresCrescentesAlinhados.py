@@ -26,7 +26,7 @@ if __name__ == "__main__":
     gerar_matriz(N)
 
 '''
-Explicando a declaracao  {valor:>{M}}
+Explicando a declaracao  print(f"{valor:>{M}}", end=" ")
 
 Dentro das chaves temos três elementos:
    valor → é o número que será exibido.
@@ -35,4 +35,9 @@ Dentro das chaves temos três elementos:
       > → alinhamento à direita.
       {M} → largura mínima da célula, ou seja, quantos caracteres o número vai ocupar.
 Se o número tiver menos dígitos que M, ele é preenchido com espaços à esquerda.
+
+Parâmetro end=" "
+O print() em Python, por padrão, termina cada impressão com uma quebra de linha (\n).
+Quando usamos end=" ", trocamos essa quebra por um espaço.
+Isso permite imprimir vários valores na mesma linha, separados por espaço.
 '''
