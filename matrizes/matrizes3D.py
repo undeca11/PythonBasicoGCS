@@ -5,7 +5,7 @@
 #### Prof. Filipo Novo Mór - filipomor.com                 ####
 ###############################################################
 import random
-N = 5
+N = 3 
 
 ###
 ### Devolve o maior valor numérico existente na matriz.
