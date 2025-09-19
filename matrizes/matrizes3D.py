@@ -124,7 +124,7 @@ def MostraMatrizDegrau(matriz, titulo, mostraMarcacoes):
 ###                                 sorteados entre 'menorValor' e 'maiorValor'
 ###
 def PopulaMatriz(qtColunas, qtLinhas, qtFatias, menorValor, maiorValor, contagem):
-    cont = 0
+    cont = qtColunas*qtFatias*qtLinhas+1
     matriz = []
     for z in range(qtFatias):
         grade = []
@@ -132,7 +132,7 @@ def PopulaMatriz(qtColunas, qtLinhas, qtFatias, menorValor, maiorValor, contagem
             linha = []
             for x in range(qtColunas):
                 if(contagem==True):
-                    cont += 1
+                    cont -= 1
                     linha.append(cont)
                 else:
                     linha.append(random.randint(menorValor, maiorValor))
